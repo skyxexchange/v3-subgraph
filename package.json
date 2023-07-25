@@ -1,0 +1,38 @@
+{
+  "name": "skyxexchange-v3-subgraph",
+  "version": "1.0.0",
+  "repository": "https://github.com/skyxexchange/v3-subgraph",
+  "license": "GPL-3.0-or-later",
+  "scripts": {
+    "graph-auth": "graph auth --studio",
+    "base-testnet:prepare-constants": "mustache config/base-testnet.json src/utils/constants.template.ts > src/utils/constants.ts",
+    "base-testnet:prepare": "mustache config/base-testnet.json subgraph.template.yaml > subgraph.base-testnet.yaml",
+    "base-testnet:codegen": "graph codegen subgraph.base-testnet.yaml --output-dir src/types/",
+    "base-testnet:build": "graph build subgraph.base-testnet.yaml",
+    "base-testnet:deploy": "graph deploy --studio skyxexchange-v3-base-testnet subgraph.base-testnet.yaml",
+    "base-testnet:deploy-staging": "graph deploy --studio skyxexchange-v3-base-testnet subgraph.base-testnet.yaml --ipfs https://api.staging.thegraph.com/ipfs/ --node https://api.staging.thegraph.com/deploy/",
+    "base-testnet:create-local": "graph create skyxexchange/skyxexchange-v3-base-testnet --node http://127.0.0.1:8020",
+    "base-testnet:deploy-local": "graph deploy skyxexchange/skyxexchange-v3-base-testnet --debug --ipfs http://localhost:5001 --node http://127.0.0.1:8020 subgraph.base-testnet.yaml",
+    "base-testnet:watch-local": "graph deploy skyxexchange/skyxexchange-v3-base-testnet --watch --debug --node http://127.0.0.1:8020/ --ipfs http://localhost:5001 subgraph.base-testnet.yaml",
+    "base:prepare-constants": "mustache config/base.json src/utils/constants.template.ts > src/utils/constants.ts",
+    "base:prepare": "mustache config/base.json subgraph.template.yaml > subgraph.base.yaml",
+    "base:codegen": "graph codegen subgraph.base.yaml --output-dir src/types/",
+    "base:build": "graph build subgraph.base.yaml",
+    "base:deploy": "graph deploy --studio skyxexchange-v3-base subgraph.base.yaml",
+    "base:deploy-staging": "graph deploy --studio skyxexchange-v3-base subgraph.base.yaml --ipfs https://api.staging.thegraph.com/ipfs/ --node https://api.staging.thegraph.com/deploy/",
+    "base:create-local": "graph create skyxexchange/skyxexchange-v3-base --node http://127.0.0.1:8020",
+    "base:deploy-local": "graph deploy skyxexchange/skyxexchange-v3-base --debug --ipfs http://localhost:5001 --node http://127.0.0.1:8020 subgraph.base.yaml",
+    "base:watch-local": "graph deploy skyxexchange/skyxexchange-v3-base --watch --debug --node http://127.0.0.1:8020/ --ipfs http://localhost:5001 subgraph.base.yaml"
+  },
+  "dependencies": {
+    "@graphprotocol/graph-cli": "^0.50.1",
+    "@graphprotocol/graph-ts": "^0.29.3",
+    "@typescript-eslint/eslint-plugin": "^5.57.1",
+    "@typescript-eslint/parser": "^5.57.1",
+    "eslint": "^8.37.0",
+    "eslint-config-prettier": "^8.8.0",
+    "mustache": "^4.1.0",
+    "prettier": "^2.8.7",
+    "typescript": "^5.0.3"
+  }
+}

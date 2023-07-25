@@ -1,0 +1,13 @@
+{
+    "network": "base",
+    "factoryv3_address": "0x04ee9D1752872d2Bc8Ab229675FE8B7f8Eeb779C",
+    "factoryv3_start_block": "7105390",
+    "nft_manager_address": "0x7D1Cc16B66f78Ef471E5a491C2B53E9D06B73FA3",
+    "nft_manager_start_block": "7108709",
+    "weth9_address": "0x8f48bF141f14f02aC72F24b49eF040ace906407e",
+    "dai_address": "",
+    "usdc_address": "",
+    "usdt_address": "0xDA321De9DEDdF061B22FD5E2876fE65f8d542C8d",
+    "wbtc_address": "",
+    "usdt_weth9_03_pool": ""
+}
