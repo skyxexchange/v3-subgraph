@@ -12,6 +12,8 @@ export const USDT_ADDRESS = '{{usdt_address}}' // USDT
 export const WBTC_ADDRESS = '{{wbtc_address}}' // WBTC
 
 export const USDT_WETH9_03_POOL = '{{usdt_weth9_03_pool}}'
+export const USDC_WETH9_03_POOL = '{{usdc_weth9_03_pool}}'
+export const DAI_WETH9_03_POOL = '{{dai_weth9_03_pool}}'
 
 export let ZERO_BI = BigInt.fromI32(0)
 export let ONE_BI = BigInt.fromI32(1)

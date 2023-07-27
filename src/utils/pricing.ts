@@ -3,7 +3,7 @@ import { ONE_BD, ZERO_BD, ZERO_BI } from './constants'
 import { Bundle, Pool, Token } from './../types/schema'
 import { BigDecimal, BigInt, log } from '@graphprotocol/graph-ts'
 import { exponentToBigDecimal, safeDiv } from '../utils/index'
-import { DAI_ADDRESS, USDC_ADDRESS, USDT_WETH9_03_POOL, USDT_ADDRESS, WBTC_ADDRESS, WETH9_ADDRESS } from './constants'
+import { DAI_ADDRESS, USDC_ADDRESS, DAI_WETH9_03_POOL, USDC_WETH9_03_POOL, USDT_WETH9_03_POOL, USDT_ADDRESS, WBTC_ADDRESS, WETH9_ADDRESS } from './constants'
 
 // token where amounts should contribute to tracked volume and liquidity
 // usually tokens that many tokens are paired with s
@@ -21,7 +21,7 @@ let STABLE_COINS: string[] = [
   USDT_ADDRESS, // USDT
 ]
 
-let MINIMUM_ETH_LOCKED = BigDecimal.fromString('60')
+let MINIMUM_ETH_LOCKED = BigDecimal.fromString('1')
 
 let Q192 = "6277101735386680763835789423207666416102355444464034512896" // 2 ** 192
 export function sqrtPriceX96ToTokenPrices(sqrtPriceX96: BigInt, token0: Token, token1: Token): BigDecimal[] {
@@ -32,17 +32,22 @@ export function sqrtPriceX96ToTokenPrices(sqrtPriceX96: BigInt, token0: Token, t
     .times(exponentToBigDecimal(token0.decimals))
     .div(exponentToBigDecimal(token1.decimals))
   let price0 = safeDiv(BigDecimal.fromString('1'), price1)
+  // log.debug("num: {} denom: {} decimals0: {} decimals1: {} price0: {} price1: {}", [num.toString(), denom.toString(), token0.decimals.toString(), token1.decimals.toString(), price0.toString(), price1.toString()])
   return [price0, price1]
 }
 
 export function getEthPriceInUSD(): BigDecimal {
   // fetch eth prices for each stablecoin
-  let usdtPool = Pool.load(USDT_WETH9_03_POOL) // usdt is token0
+  let usdtPool = Pool.load(USDT_WETH9_03_POOL) // usdt is token1
   if (usdtPool !== null) {
     return usdtPool.token1Price
-  } else {
-    return ZERO_BD
   }
+  usdtPool = Pool.load(USDT_WETH9_03_POOL.toLowerCase())
+  if (usdtPool !== null) {
+    return usdtPool.token1Price
+  }
+  log.debug("NULL usdtPool: {}", [USDT_WETH9_03_POOL])
+  return ZERO_BD
 }
 
 /**

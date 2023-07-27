@@ -9,5 +9,7 @@
     "usdc_address": "0x0EFF288275F280db38FC8d4A3116E0777370A3b5",
     "usdt_address": "0xDA321De9DEDdF061B22FD5E2876fE65f8d542C8d",
     "wbtc_address": "0x8DD4B4ab9B4D4C5bC2Fdd15E8b42360b296d5C8A",
-    "usdt_weth9_03_pool": "0xC3C5D341Bdf91D9dE1010c10e2d8469EB4279eE7"
+    "usdt_weth9_03_pool": "0xC3C5D341Bdf91D9dE1010c10e2d8469EB4279eE7",
+    "usdc_weth9_03_pool": "0xCC3Ce7b64a3e401e4978d13fd7239180b8D417b6",
+    "dai_weth9_03_pool": "0xe9b3e07843B83211dce4Bd5b161281137A02Ec4d"
 }

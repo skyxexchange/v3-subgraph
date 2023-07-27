@@ -35,8 +35,11 @@ export function handleInitialize(event: Initialize): void {
 
   // update ETH price now that prices could have changed
   let bundle = Bundle.load('1') as Bundle
-  bundle.ethPriceUSD = getEthPriceInUSD()
-  bundle.save()
+  let ethPriceInUSD = getEthPriceInUSD()
+  if (ethPriceInUSD.gt(ZERO_BD)) {
+    bundle.ethPriceUSD = ethPriceInUSD
+    bundle.save()
+  }
 
   updatePoolDayData(event)
   updatePoolHourData(event)
@@ -355,11 +358,15 @@ export function handleSwap(event: SwapEvent): void {
   let prices = sqrtPriceX96ToTokenPrices(pool.sqrtPrice, token0 as Token, token1 as Token)
   pool.token0Price = prices[0]
   pool.token1Price = prices[1]
+  // log.debug("sqrtPrice: {} token0Price: {} token0Price: {}", [pool.sqrtPrice.toString(), pool.token0Price.toString(), pool.token1Price.toString()])
   pool.save()
 
   // update USD pricing
-  bundle.ethPriceUSD = getEthPriceInUSD()
-  bundle.save()
+  let ethPriceInUSD = getEthPriceInUSD()
+  if (ethPriceInUSD.gt(ZERO_BD)) {
+    bundle.ethPriceUSD = ethPriceInUSD
+    bundle.save()
+  }
   token0.derivedETH = findEthPerToken(token0 as Token)
   token1.derivedETH = findEthPerToken(token1 as Token)
 
